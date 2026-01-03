@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+/* ========================================
+   C++ Compiler - Design System
+   ======================================== */
+
+:root {
+  /* Base Colors */
+  --background: #0a0a0f;
+  --background-secondary: #12121a;
+  --foreground: #e4e4e7;
+  --foreground-muted: #71717a;
+  
+  /* Accent Colors */
+  --accent-primary: #3b82f6;
+  --accent-secondary: #8b5cf6;
+  --accent-success: #22c55e;
+  --accent-error: #ef4444;
+  --accent-warning: #f59e0b;
+  
+  /* Editor Colors */
+  --editor-bg: #1a1a24;
+  --editor-line-bg: #0d0d12;
+  --editor-border: #27272a;
+  --editor-gutter: #3f3f46;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  
+  /* Glow Effects */
+  --glow-primary: 0 0 20px rgba(59, 130, 246, 0.4);
+  --glow-success: 0 0 20px rgba(34, 197, 94, 0.4);
+  --glow-error: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ========================================
+   Base Styles
+   ======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+/* ========================================
+   Glass Panel Effect
+   ======================================== */
+
+.glass-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ========================================
+   Code Editor Styles
+   ======================================== */
+
+.code-editor {
+  background: var(--editor-bg);
+  border: 1px solid var(--editor-border);
+  border-radius: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow: hidden;
+}
+
+.code-editor textarea {
+  background: transparent;
+  color: var(--foreground);
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  tab-size: 4;
+}
+
+.code-editor textarea::placeholder {
+  color: var(--foreground-muted);
+}
+
+.line-numbers {
+  background: var(--editor-line-bg);
+  color: var(--editor-gutter);
+  user-select: none;
+  text-align: right;
+  padding-right: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ========================================
+   Buttons
+   ======================================== */
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--glow-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: var(--glass-bg);
+  color: var(--foreground);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ========================================
+   Output Panel
+   ======================================== */
+
+.output-panel {
+  background: var(--editor-line-bg);
+  border: 1px solid var(--editor-border);
+  border-radius: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.output-success {
+  color: var(--accent-success);
+}
+
+.output-error {
+  color: var(--accent-error);
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: var(--glow-primary);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.7);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ========================================
+   Scrollbar Styles
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--editor-gutter);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-muted);
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
